@@ -43,3 +43,19 @@ function checkVictory(board) {
     }
 }
 
+const gameboard = [
+    [0,0,0],
+    [0,0,0],
+    [0,0,0]
+];
+
+const player1 = {
+    name: 'Roland',
+    symbol: 'X',
+};
+
+const player2 = {
+    name: 'Olga',
+    symbol: 'O',
+};
+
