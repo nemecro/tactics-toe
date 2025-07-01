@@ -59,3 +59,30 @@ const player2 = {
     symbol: 'O',
 };
 
+let gameStatus = -1;
+let activePlayer = player1;
+
+let row = 0;
+let column = 0;
+
+while(gameStatus === -1){
+    activePlayer = activePlayer === player1 ? player2 : player1;
+    alert(`${activePlayer.name}'s turn`);
+
+
+    do {
+        row = prompt('Row: ');
+        column = prompt('Column: ');
+    } while (gameboard[row] == undefined || gameboard[row][column] == undefined || gameboard[row][column] !== 0)
+
+    gameboard[row][column] = activePlayer.symbol;
+
+    console.table(gameboard);
+    gameStatus = checkVictory(gameboard);
+    if(gameStatus === activePlayer.symbol){
+        alert(`${activePlayer.name} is victorious`);
+    }
+    if (gameStatus === 0){
+        alert('draw');
+    }
+}
