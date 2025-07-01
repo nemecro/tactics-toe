@@ -2,8 +2,7 @@
 
 /**
  * @param {Array} board - 2D array
- * @returns {number} -1 for victory not met, 0 for draw
- * @returns {string} symbol of the winner
+ * @returns {string|number} Winner's symbol, 0 for draw, -1 for ongoing game
  */
 function checkVictory(board) {
     for (let i = 0; i < board.length; i++){
@@ -25,9 +24,11 @@ function checkVictory(board) {
 
     // diagonal
     if (
-        board[1][1] !== 0 &&
-        board[0][0] === board[1][1] && board[1][1] === board[2][2] ||
-        board[2][0] === board[1][1] && board[1][1] === board[0][2]
+        board[1][1] !== 0 && 
+        (
+            board[0][0] === board[1][1] && board[1][1] === board[2][2] ||
+            board[2][0] === board[1][1] && board[1][1] === board[0][2]
+        )
     ){
         return board[1][1];
     }
@@ -38,9 +39,7 @@ function checkVictory(board) {
     }
 
     // draw
-    if (board.every(row => !row.includes(0))){
-        return 0;
-    }
+    return 0;
 }
 
 const gameboard = [
@@ -69,7 +68,6 @@ while(gameStatus === -1){
     activePlayer = activePlayer === player1 ? player2 : player1;
     alert(`${activePlayer.name}'s turn`);
 
-
     do {
         row = prompt('Row: ');
         column = prompt('Column: ');
@@ -77,11 +75,12 @@ while(gameStatus === -1){
 
     gameboard[row][column] = activePlayer.symbol;
 
-    console.table(gameboard);
     gameStatus = checkVictory(gameboard);
+
     if(gameStatus === activePlayer.symbol){
         alert(`${activePlayer.name} is victorious`);
     }
+
     if (gameStatus === 0){
         alert('draw');
     }
