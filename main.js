@@ -48,15 +48,16 @@ const gameboard = [
     [0,0,0]
 ];
 
-const player1 = {
-    name: 'Roland',
-    symbol: 'X',
-};
+const createPlayer = function(name, symbol){
+    return {
+        name,
+        symbol,
+    }
+}
 
-const player2 = {
-    name: 'Olga',
-    symbol: 'O',
-};
+const player1 = createPlayer('Roland', 'X');
+
+const player2 = createPlayer('Olga', '0');
 
 let gameStatus = -1;
 let activePlayer = player1;
@@ -75,6 +76,7 @@ while(gameStatus === -1){
 
     gameboard[row][column] = activePlayer.symbol;
 
+    console.table(gameboard);
     gameStatus = checkVictory(gameboard);
 
     if(gameStatus === activePlayer.symbol){
@@ -85,3 +87,7 @@ while(gameStatus === -1){
         alert('draw');
     }
 }
+
+// I need a factory function to create Players
+// I need a gameboard IIFE
+// I need a game factory function
